@@ -11,6 +11,8 @@ public class User {
 
 	private String email;
 	
+	private long tripCount;
+	
 	private CareemWallet wallet;
 
 	public User() {
@@ -46,6 +48,18 @@ public class User {
 	
 	public void setWallet(CareemWallet wallet) {
 		this.wallet = wallet;
+	}
+	
+	public long getTripCount() {
+		return tripCount;
+	}
+	
+	public void setTripCount(long tripCount) {
+		this.tripCount = tripCount;
+	}
+	
+	public void incTrip() {
+		this.tripCount++;
 	}
 	
 	@Override
