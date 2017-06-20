@@ -18,5 +18,9 @@ public class CareemWallet {
 	public void addCoins(double coins) {
 		this.setCoins(getCoins() + coins);
 	}
+	
+	public void removeCoins(double coins) {
+		this.setCoins(getCoins() - coins);
+	}
 
 }
