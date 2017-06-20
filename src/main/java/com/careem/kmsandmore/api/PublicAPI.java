@@ -41,8 +41,13 @@ public class PublicAPI {
 	}
 
 	@RequestMapping(path = "/{userId}/{targetUser}/transfer", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public void transferCoinsToUser(@PathVariable("userId") String userId, @PathVariable("targetUser") String targetUser, @RequestBody TransferCoinsRequest transferCoinsRequest) {
-		coinService.transferCoinsToUser(userId, targetUser, transferCoinsRequest);
+	public RedeemResponse transferCoinsToUser(@PathVariable("userId") String userId, @PathVariable("targetUser") String targetUser, @RequestBody TransferCoinsRequest transferCoinsRequest) {
+		return coinService.transferCoinsToUser(userId, targetUser, transferCoinsRequest);
+	}
+
+	@RequestMapping(path = "/{userId}/{productId}/buy", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public RedeemResponse buyProduct(@PathVariable("userId") String userId, @PathVariable("productId") Long productId) {
+		return coinService.buyProduct(userId, productId);
 	}
 
 }
