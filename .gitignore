@@ -47,3 +47,9 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+target/
+.settings/org.eclipse.m2e.core.prefs
+.settings/org.eclipse.core.resources.prefs
+.project
+.classpath
+.settings/org.eclipse.jdt.core.prefs
