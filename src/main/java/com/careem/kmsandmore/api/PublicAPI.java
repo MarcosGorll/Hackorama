@@ -50,4 +50,9 @@ public class PublicAPI {
 		return coinService.buyProduct(userId, productId);
 	}
 
+	@RequestMapping(path = "/{userId}/paytrip", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public RedeemResponse payTrip(@PathVariable("userId") String userId, @RequestBody PayTripWithCoinsRequest payTripWithCoinsRequest) {
+		return coinService.payTrip(userId, payTripWithCoinsRequest.getValue(), payTripWithCoinsRequest.getPercentage());
+	}
+
 }

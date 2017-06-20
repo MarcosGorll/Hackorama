@@ -1,5 +1,8 @@
 package com.careem.kmsandmore.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 
 public class User {
@@ -13,9 +16,14 @@ public class User {
 	
 	private long tripCount;
 	
+	private double kilometers;
+	
 	private CareemWallet wallet;
+	
+	private List<Trip> trips;
 
 	public User() {
+		this.trips = new ArrayList<>(); 
 	}
 
 	public String getId() {
@@ -42,14 +50,6 @@ public class User {
 		this.email = email;
 	}
 	
-	public CareemWallet getWallet() {
-		return wallet;
-	}
-	
-	public void setWallet(CareemWallet wallet) {
-		this.wallet = wallet;
-	}
-	
 	public long getTripCount() {
 		return tripCount;
 	}
@@ -60,6 +60,38 @@ public class User {
 	
 	public void incTrip() {
 		this.tripCount++;
+	}
+	
+	public double getKilometers() {
+		return kilometers;
+	}
+	
+	public void setKilometers(double kilometers) {
+		this.kilometers = kilometers;
+	}
+	
+	public void incKilometers(double kilometers) {
+		this.kilometers += kilometers;
+	}
+	
+	public CareemWallet getWallet() {
+		return wallet;
+	}
+	
+	public void setWallet(CareemWallet wallet) {
+		this.wallet = wallet;
+	}
+	
+	public List<Trip> getTrips() {
+		return trips;
+	}
+	
+	public void setTrips(List<Trip> trips) {
+		this.trips = trips;
+	}
+	
+	public void addTrip(Trip trip) {
+		this.trips.add(trip);
 	}
 	
 	@Override
