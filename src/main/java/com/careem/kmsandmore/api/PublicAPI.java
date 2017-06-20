@@ -1,5 +1,6 @@
 package com.careem.kmsandmore.api;
 
+import com.careem.kmsandmore.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.careem.kmsandmore.data.CareemWallet;
-import com.careem.kmsandmore.data.User;
-import com.careem.kmsandmore.data.UserRepository;
+import java.util.List;
 
 @RequestMapping("/careemcoin")
 @RestController
@@ -18,6 +17,9 @@ public class PublicAPI {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	ProductRepository productRepository;
 
 	// Sanity
 	@RequestMapping(path = "/test", method = RequestMethod.GET)
@@ -43,7 +45,11 @@ public class PublicAPI {
 		user.getWallet().setCoins(tripEndingRequest.getKilometers() * 0.001);
 		userRepository.save(user);
 	}
-	
+
+	@RequestMapping(path = "/products", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Product> getProducts() {
+		return productRepository.findAll();
+	}
 	
 
 }

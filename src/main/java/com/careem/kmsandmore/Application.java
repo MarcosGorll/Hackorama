@@ -13,7 +13,7 @@ public class Application {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
 		
 		WarmupService warmupService = context.getBean(WarmupService.class);
-		warmupService.createDefaultUsersIfNotExists();
+		warmupService.createDefaultRecords();
 	}
 
 }
