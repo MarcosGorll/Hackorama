@@ -1,5 +1,7 @@
 package com.careem.kmsandmore.api;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,10 +42,30 @@ public class PublicAPI {
 		if (user == null) {
 			return;
 		}
-		user.getWallet().setCoins(tripEndingRequest.getKilometers() * 0.001);
+		user.getWallet().setCoins(tripEndingRequest.getKilometers() * 0.001); // TODO
 		userRepository.save(user);
 	}
-	
-	
+
+	@RequestMapping(path = "/{userId}/{targetUser}/transfer", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public void transferCoinsToUser(@PathVariable("userId") String userId, @PathVariable("targetUser") String targetUser, @RequestBody TransferCoinsRequest transferCoinsRequest) {
+		User user = userRepository.findOne(userId);
+		if (user == null) {
+			return;
+		}
+
+		User target = userRepository.findOne(targetUser);
+		if (target == null) {
+			return;
+		}
+
+		if (user.getWallet().getCoins() < transferCoinsRequest.getAmount()) {
+			return;
+		}
+
+		user.getWallet().removeCoins(transferCoinsRequest.getAmount());
+		target.getWallet().addCoins(transferCoinsRequest.getAmount());
+
+		userRepository.save(Arrays.asList(user, target));
+	}
 
 }
