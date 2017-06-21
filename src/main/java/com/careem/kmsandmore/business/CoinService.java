@@ -51,12 +51,11 @@ public class CoinService {
 		if (user == null) {
 			return;
 		}
-		double coins = tripEndingRequest.getKilometers() * 0.01;// TODO
+		double coins = tripEndingRequest.getValue() * 2.0;
 		coins *= paymentService.paymentCoinsMultiplier(PaymentType.forCode(tripEndingRequest.getPaymentTypeCode()));
 		coins *= peakService.peakMultiplier(System.currentTimeMillis());
 		user.incTrip();
-		user.incKilometers(tripEndingRequest.getKilometers());
-		user.getTrips().add(new Trip(new Date(), tripEndingRequest.getKilometers(), tripEndingRequest.getPaymentTypeCode()));
+		user.getTrips().add(new Trip(new Date(), tripEndingRequest.getValue(), tripEndingRequest.getPaymentTypeCode()));
 		user.getWallet().addCoins(coins);
 		userRepository.save(user);
 	}
@@ -83,20 +82,34 @@ public class CoinService {
 
 		return new RedeemResponse(true, "OK.");
 	}
-	
+
 	public RedeemResponse payTrip(String userId, double value, double percentage) {
 		User user = userRepository.findOne(userId);
 		if (user == null) {
 			return new RedeemResponse(false, "User not found.");
 		}
-		
+
 		double valueInCoins = value * percentage * 100.0;
-		
+
 		if (user.getWallet().getCoins() < valueInCoins) {
 			return new RedeemResponse(false, "Amount not available.");
 		}
-		
+
 		user.getWallet().removeCoins(valueInCoins);
+		userRepository.save(user);
+		return new RedeemResponse(true, "OK.");
+	}
+
+	public RedeemResponse burnCoins(String userId, double amount) {
+		User user = userRepository.findOne(userId);
+		if (user == null) {
+			return new RedeemResponse(false, "User not found.");
+		}
+		if (user.getWallet().getCoins() < amount) {
+			return new RedeemResponse(false, "Amount not available.");
+		}
+
+		user.getWallet().removeCoins(amount);
 		userRepository.save(user);
 		return new RedeemResponse(true, "OK.");
 	}

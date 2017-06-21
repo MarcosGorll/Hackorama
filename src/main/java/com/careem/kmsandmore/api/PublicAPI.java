@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.careem.kmsandmore.business.CoinService;
+import com.careem.kmsandmore.data.CareemWallet;
+import com.careem.kmsandmore.data.Product;
+import com.careem.kmsandmore.data.ProductRepository;
+import com.careem.kmsandmore.data.User;
+import com.careem.kmsandmore.data.UserRepository;
 
 @RequestMapping("/careemcoin")
 @RestController
@@ -25,6 +30,11 @@ public class PublicAPI {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@RequestMapping(path = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<User> getUsers() {
+		return userRepository.findAll();
+	}
 
 	@RequestMapping(path = "/{userId}/wallet", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public CareemWallet getWallet(@PathVariable("userId") String userId) {
@@ -55,10 +65,10 @@ public class PublicAPI {
 	public RedeemResponse payTrip(@PathVariable("userId") String userId, @RequestBody PayTripWithCoinsRequest payTripWithCoinsRequest) {
 		return coinService.payTrip(userId, payTripWithCoinsRequest.getValue(), payTripWithCoinsRequest.getPercentage());
 	}
-
-	@RequestMapping(path = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<User> getUsers() {
-		return userRepository.findAll();
+	
+	@RequestMapping(path = "/{userId}/charity", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public RedeemResponse burnWithcharity(@PathVariable("userId") String userId, @RequestBody BurnCoinsRequest burnCoinsRequest) {
+		return coinService.burnCoins(userId,burnCoinsRequest.getAmount());
 	}
 
 }

@@ -13,17 +13,15 @@ public class User {
 	private String name;
 
 	private String email;
-	
+
 	private long tripCount;
-	
-	private double kilometers;
-	
+
 	private CareemWallet wallet;
-	
+
 	private List<Trip> trips;
 
 	public User() {
-		this.trips = new ArrayList<>(); 
+		this.trips = new ArrayList<>();
 	}
 
 	public String getId() {
@@ -49,51 +47,39 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public long getTripCount() {
 		return tripCount;
 	}
-	
+
 	public void setTripCount(long tripCount) {
 		this.tripCount = tripCount;
 	}
-	
+
 	public void incTrip() {
 		this.tripCount++;
 	}
-	
-	public double getKilometers() {
-		return kilometers;
-	}
-	
-	public void setKilometers(double kilometers) {
-		this.kilometers = kilometers;
-	}
-	
-	public void incKilometers(double kilometers) {
-		this.kilometers += kilometers;
-	}
-	
+
 	public CareemWallet getWallet() {
 		return wallet;
 	}
-	
+
 	public void setWallet(CareemWallet wallet) {
 		this.wallet = wallet;
 	}
-	
+
 	public List<Trip> getTrips() {
 		return trips;
 	}
-	
+
 	public void setTrips(List<Trip> trips) {
 		this.trips = trips;
 	}
-	
+
 	public void addTrip(Trip trip) {
 		this.trips.add(trip);
 	}
-	
+
 	@Override
 	public String toString() {
 		return getId() + " - " + getName();
