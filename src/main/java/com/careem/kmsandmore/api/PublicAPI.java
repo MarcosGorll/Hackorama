@@ -2,7 +2,6 @@ package com.careem.kmsandmore.api;
 
 import java.util.List;
 
-import com.careem.kmsandmore.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,8 +41,9 @@ public class PublicAPI {
 	}
 
 	@RequestMapping(path = "/{userId}/endtrip", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public void registerTripEnding(@PathVariable("userId") String userId, @RequestBody TripEndingRequest tripEndingRequest) {
+	public DefaultResponse registerTripEnding(@PathVariable("userId") String userId, @RequestBody TripEndingRequest tripEndingRequest) {
 		coinService.registerTripEnding(userId, tripEndingRequest);
+		return new DefaultResponse("OK");
 	}
 
 	@RequestMapping(path = "/products", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -65,10 +65,10 @@ public class PublicAPI {
 	public RedeemResponse payTrip(@PathVariable("userId") String userId, @RequestBody PayTripWithCoinsRequest payTripWithCoinsRequest) {
 		return coinService.payTrip(userId, payTripWithCoinsRequest.getValue(), payTripWithCoinsRequest.getPercentage());
 	}
-	
+
 	@RequestMapping(path = "/{userId}/charity", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public RedeemResponse burnWithcharity(@PathVariable("userId") String userId, @RequestBody BurnCoinsRequest burnCoinsRequest) {
-		return coinService.burnCoins(userId,burnCoinsRequest.getAmount());
+		return coinService.burnCoins(userId, burnCoinsRequest.getAmount());
 	}
 
 }

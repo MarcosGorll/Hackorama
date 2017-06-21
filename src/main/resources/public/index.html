@@ -1,33 +1,144 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Careem Coins</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="api.js"></script>
-    </head>
+<head>
+<title>Careem Coins</title>
 
-    <body>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
 
-        <table>
-            <tr>
-                <th>User name</th>
-                <th>Trip Count</th>
-                <th>Careem Coin</th>
-            </tr>
-            <div class="users"></div>
-        </table>
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
 
-        <div>
-            <p class="wallet-value">Wallet value is </p>
-        </div>
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 
-        <form>
-            <select class="trip">
-                <div class="users-options"></div>
-            </select>
-            <input type="text" value="Distance Km">
-            <input type="submit" value="Simulate Trip">
-        </form>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
 
-    </body>
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+<!-- Latest compiled and minified Locales -->
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+
+<script src="api.js"></script>
+</head>
+
+<body>
+
+	<table id="customers" class=.table-hover>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Coins</th>
+			</tr>
+		</thead>
+	</table>
+
+	<span id="selected_customer_name" class="label label-success"></span>
+	<br>
+	<br>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Trip simulation</div>
+		<div class="panel-body">
+
+			<div class="form-group">
+				<span class="label label-default">USD value: </span> <input
+					id="trip_value" type="text" class="form-control">
+			</div>
+			<select id="payment_type" class="form-control">
+				<option value="CASH">CASH</option>
+				<option value="CREDIT_CARD">CREDIT_CARD</option>
+			</select>
+			<button id="end_trip_button" type="button" class="btn btn-success">End
+				trip</button>
+		</div>
+	</div>
+
+	<br>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Transfer coins</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<span class="label label-default">To customer: </span> <input
+					id="transfer_customer_target" type="text" class="form-control">
+			</div>
+			<div class="form-group">
+				<span class="label label-default">Coins: </span> <input
+					id="amout_transfer" type="text" class="form-control">
+			</div>
+			<button id="transfer_button" type="button" class="btn btn-success">Transfer
+				coins</button>
+		</div>
+	</div>
+
+	<br>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Buy products</div>
+		<span id="selected_product_name" class="label label-success"></span>
+		<div class="panel-body">
+			<table id="products" class=.table-hover>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+			</table>
+			<button id="buy_product_button" type="button" class="btn btn-success">Buy
+				product</button>
+		</div>
+	</div>
+
+	<br>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Pay trip with coins</div>
+		<span id="selected_product_name" class="label label-success"></span>
+		<div class="panel-body">
+			<div class="form-group">
+				<span class="label label-default">USD value: </span> <input
+					id="trip_pay_value" type="text" class="form-control">
+			</div>
+			<div class="form-group">
+				<span class="label label-default">Percentage with coins: </span> <input
+					id="trip_pay_percentage" type="text" class="form-control">
+			</div>
+			<button id="pay_button" type="button" class="btn btn-success">Pay
+				trip</button>
+		</div>
+	</div>
+
+	<br>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Other possibilites</div>
+		<span id="selected_product_name" class="label label-success"></span>
+		<button type="button" class="btn btn-success">Charity!</button>
+		<button type="button" class="btn btn-success">Buy Fly Miles!</button>
+		<button type="button" class="btn btn-success">Donate to
+			Capitain!</button>
+	</div>
+	</div>
+
+
+</body>
 </html>

@@ -61,7 +61,7 @@ public class WarmupService {
 			LOG.info("Creating Careem T-shirt product.");
 
 			Product product = new Product();
-			product.setId(2);
+			product.setId(1);
 			product.setName("Careem T-shirt");
 			product.setPrice(5_000);
 
@@ -72,7 +72,7 @@ public class WarmupService {
 			LOG.info("Creating cap product.");
 
 			Product product = new Product();
-			product.setId(3);
+			product.setId(2);
 			product.setName("Careem Cap");
 			product.setPrice(2_000);
 

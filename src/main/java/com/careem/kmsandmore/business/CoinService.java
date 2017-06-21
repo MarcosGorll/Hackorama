@@ -3,10 +3,7 @@ package com.careem.kmsandmore.business;
 import java.util.Arrays;
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.careem.kmsandmore.api.RedeemResponse;
@@ -22,8 +19,6 @@ import com.careem.kmsandmore.data.UserRepository;
 
 @Service
 public class CoinService {
-
-	private static Logger LOG = LoggerFactory.getLogger(CoinService.class);
 
 	@Autowired
 	PaymentService paymentService;
@@ -45,7 +40,6 @@ public class CoinService {
 		return user.getWallet();
 	}
 
-	@Async
 	public void registerTripEnding(String userId, TripEndingRequest tripEndingRequest) {
 		User user = userRepository.findOne(userId);
 		if (user == null) {
