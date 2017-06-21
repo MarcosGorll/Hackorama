@@ -5,15 +5,15 @@ import java.util.Date;
 public class Trip {
 
 	private Date date;
-	private double kilometers;
+	private double value;
 	private int paymentTypeId;
 
 	public Trip() {
 	}
 
-	public Trip(Date date, double kilometers, int paymentTypeId) {
+	public Trip(Date date, double value, int paymentTypeId) {
 		this.date = date;
-		this.kilometers = kilometers;
+		this.value = value;
 		this.paymentTypeId = paymentTypeId;
 	}
 
@@ -25,12 +25,12 @@ public class Trip {
 		this.date = date;
 	}
 
-	public double getKilometers() {
-		return kilometers;
+	public double getValue() {
+		return value;
 	}
 
-	public void setKilometers(double kilometers) {
-		this.kilometers = kilometers;
+	public void setValue(double value) {
+		this.value = value;
 	}
 
 	public int getPaymentTypeId() {

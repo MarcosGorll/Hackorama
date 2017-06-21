@@ -57,35 +57,24 @@ public class WarmupService {
 	}
 
 	public void createDefaultProductsIfNotExists() {
-
 		if (!productRepository.exists(1L)) {
-			LOG.info("Creating Free ride product.");
-
-			Product product = new Product();
-			product.setId(1);
-			product.setName("Free ride");
-			product.setPrice(9000);
-			productRepository.save(product);
-		}
-
-		if (!productRepository.exists(2L)) {
 			LOG.info("Creating Careem T-shirt product.");
 
 			Product product = new Product();
 			product.setId(2);
 			product.setName("Careem T-shirt");
-			product.setPrice(100);
+			product.setPrice(5_000);
 
 			productRepository.save(product);
 		}
 
-		if (!productRepository.exists(3L)) {
-			LOG.info("Creating Car type upgrade product.");
+		if (!productRepository.exists(2L)) {
+			LOG.info("Creating cap product.");
 
 			Product product = new Product();
 			product.setId(3);
-			product.setName("Car type upgrade");
-			product.setPrice(2000);
+			product.setName("Careem Cap");
+			product.setPrice(2_000);
 
 			productRepository.save(product);
 		}
