@@ -2,6 +2,7 @@ package com.careem.kmsandmore.api;
 
 import java.util.List;
 
+import com.careem.kmsandmore.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.careem.kmsandmore.business.CoinService;
-import com.careem.kmsandmore.data.CareemWallet;
-import com.careem.kmsandmore.data.Product;
-import com.careem.kmsandmore.data.ProductRepository;
 
 @RequestMapping("/careemcoin")
 @RestController
@@ -24,6 +22,9 @@ public class PublicAPI {
 
 	@Autowired
 	ProductRepository productRepository;
+
+	@Autowired
+	UserRepository userRepository;
 
 	@RequestMapping(path = "/{userId}/wallet", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public CareemWallet getWallet(@PathVariable("userId") String userId) {
@@ -53,6 +54,11 @@ public class PublicAPI {
 	@RequestMapping(path = "/{userId}/paytrip", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public RedeemResponse payTrip(@PathVariable("userId") String userId, @RequestBody PayTripWithCoinsRequest payTripWithCoinsRequest) {
 		return coinService.payTrip(userId, payTripWithCoinsRequest.getValue(), payTripWithCoinsRequest.getPercentage());
+	}
+
+	@RequestMapping(path = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<User> getUsers() {
+		return userRepository.findAll();
 	}
 
 }
