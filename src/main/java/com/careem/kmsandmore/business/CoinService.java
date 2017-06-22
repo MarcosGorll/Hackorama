@@ -83,7 +83,7 @@ public class CoinService {
 			return new RedeemResponse(false, "User not found.");
 		}
 
-		double valueInCoins = value * percentage * 100.0;
+		double valueInCoins = value * (percentage / 100.0) * 100.0;
 
 		if (user.getWallet().getCoins() < valueInCoins) {
 			return new RedeemResponse(false, "Amount not available.");
